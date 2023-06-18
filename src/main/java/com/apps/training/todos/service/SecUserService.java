@@ -39,7 +39,7 @@ public class SecUserService {
     }
 
     public SecUser addUser(SecUser user) {
-      //  user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         SecUser addedUser = userRepo.save(user);
         return addedUser;
 
