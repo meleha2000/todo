@@ -33,7 +33,7 @@
               </c:forEach>
             </tbody>
         </table>
-       <a href="user/add" class="btn btn-success"> Add User</a>
+       <a href="/users/add" class="btn btn-success"> Add User</a>
   </div>
 
 </body>

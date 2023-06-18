@@ -1,7 +1,6 @@
 package com.apps.training.todos.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +9,9 @@ import lombok.Setter;
 @Setter
 public class SecUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Column(name = "user_name", length = 300, nullable = false, unique = true)
     private String userName;
     private String password;
     private String roleName;

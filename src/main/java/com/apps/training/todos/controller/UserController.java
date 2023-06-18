@@ -4,6 +4,10 @@ import com.apps.training.todos.entity.SecUser;
 import com.apps.training.todos.entity.Todo;
 import com.apps.training.todos.service.SecUserService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,9 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
+@Getter
+@Setter
+@AllArgsConstructor
 @Controller
 public class UserController {
+    @Autowired
     private SecUserService userService;
 
     @GetMapping("/users-list")
