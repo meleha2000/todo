@@ -15,13 +15,13 @@ import java.util.Optional;
 @Service
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 public class SecUserService {
 
-    @Autowired    SecUserRepo userRepo;
-
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private  SecUserRepo userRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     public List<SecUser> findAllUsers(){
         return userRepo.findAll();
     }
