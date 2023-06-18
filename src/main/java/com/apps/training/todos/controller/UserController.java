@@ -54,7 +54,8 @@ public class UserController {
             return "userForm";
         }
         //return new ModelAndView("redirect:/todos-list");
-        SecUser savedUser = userService.addUser(user);
+        SecUser savedUser = null;
+        savedUser = userService.addUser(user);
         model.addAttribute("msg", "todo number " + savedUser.getId() + " is added ..");
         return "redirect:users-list";
     }

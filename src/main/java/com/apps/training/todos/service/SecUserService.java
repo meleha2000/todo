@@ -2,6 +2,7 @@ package com.apps.training.todos.service;
 
 import com.apps.training.todos.entity.SecUser;
 import com.apps.training.todos.repo.SecUserRepo;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,15 +47,16 @@ public class SecUserService //implements UserDetailsService
         else
             return null;
     }
-
+    @Transactional
     public SecUser addUser(SecUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         SecUser addedUser = userRepo.save(user);
         return addedUser;
 
     }
-
-    public SecUser updateTodo(SecUser user) {
+    @Transactional
+    public SecUser updateUser(SecUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         SecUser updatedUser = userRepo.save(user);
         return updatedUser;
     }
