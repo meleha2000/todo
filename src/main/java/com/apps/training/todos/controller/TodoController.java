@@ -3,6 +3,8 @@ package com.apps.training.todos.controller;
 import java.util.List;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,7 +30,7 @@ public class TodoController {
 	@GetMapping("/todos-list")
 	public String findAllTodos(Model model, @ModelAttribute("msg") String msg){
 
-		List<Todo> list = todoService.findAllTodos();
+		List<Todo> list = todoService.findTodoByUserName(getLoggedInUserName());
 		model.addAttribute("todosList", list);
 		return  "todosList";
 	}
@@ -56,6 +58,7 @@ public class TodoController {
 			return "todoForm";
 		}
 		//return new ModelAndView("redirect:/todos-list");
+		todo.setUserName(getLoggedInUserName());
 		Todo savedTodo = todoService.addTodo(todo);
 		model.addAttribute("msg", "todo number " + savedTodo.getId() + " is added ..");
 		return "redirect:todos-list";
@@ -71,5 +74,10 @@ public class TodoController {
 	public ModelAndView removeTodo(@PathVariable int id) {
 		todoService.removeTodoById(id);
 		return new ModelAndView("redirect:/todos-list");
+	}
+
+	private String getLoggedInUserName(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return auth.getName();
 	}
 }
